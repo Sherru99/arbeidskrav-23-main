@@ -15,9 +15,9 @@ const showAllResources = () => {
 
   htmlTxt = `
 
-    <p id="wood-count">>Wood: ${woodCount}</p>
-    <p id="gold-count">>Gold: ${goldCount}</p>
-    <p id="iron-count">>Iron: ${ironCount}</p>
+    <p id="wood-count">Wood: ${woodCount}</p>
+    <p id="gold-count">Gold: ${goldCount}</p>
+    <p id="iron-count">Iron: ${ironCount}</p>
 
         `;
 
@@ -25,14 +25,14 @@ const showAllResources = () => {
 };
 
 function updateCounts() {
-  document.getElementById("gold-count").textContent = `Gold: ${goldCount}`;
-  document.getElementById("iron-count").textContent = `Iron: ${ironCount}`;
-  document.getElementById("wood-count").textContent = `Wood: ${woodCount}`;
-
   // Save counts to localStorage
   localStorage.setItem("goldCount", goldCount);
   localStorage.setItem("ironCount", ironCount);
   localStorage.setItem("woodCount", woodCount);
+
+  document.getElementById("gold-count").textContent = `Gold: ${goldCount}`;
+  document.getElementById("iron-count").textContent = `Iron: ${ironCount}`;
+  document.getElementById("wood-count").textContent = `Wood: ${woodCount}`;
 }
 
 //
@@ -54,62 +54,53 @@ const cannon = document.querySelector("#cannon");
 const catapult = document.querySelector("#catapult");
 const elephant = document.querySelector("#elephant");
 
-const warriors = [
-  {
-    categoryName: "viper",
-    priceGold: 50,
-    image: "./images/warrior-1.jpg",
-  },
-  {
-    categoryName: "giant",
-    priceGold: 50,
-    image: "./images/warrior-2.jpg",
-  },
-  {
-    categoryName: "paladin",
-    priceGold: 50,
-    image: "./images/warrior-3.jpg",
-  },
-  {
-    categoryName: "rogue",
-    priceGold: 50,
-    image: "./images/warrior-4.jpg",
-  },
-  {
-    categoryName: "knight",
-    priceGold: 50,
-    image: "./images/warrior-5.jpg",
-  },
-  {
-    categoryName: "archer",
-    priceGold: 50,
-    image: "./images/warrior-6.jpg",
-  },
-];
+// Output Div
+const warriorOutputDiv = document.querySelector("#buyable-warriors");
 
-const other = [
-  {
-    categoryName: "cannon",
-    priceGold: 50,
-    priceWood: 100,
-    priceIron: 50,
-    image: "./images/cannon.png",
-  },
-  {
-    categoryName: "catapult",
-    priceGold: 25,
-    priceWood: 50,
-    priceIron: 25,
-    image: "./images/catapult.png",
-  },
-  {
-    categoryName: "elephant",
-    priceGold: 250,
-    priceWood: 50,
-    priceIron: 100,
-    image: "./images/elephant.png",
-  },
-];
+// StructuredClone object array copies
+
+const other = OtherModule.getStructuredClone();
+const warriors = WarriorModule.getStructuredClone();
+
+// generating HTML in output divs :D
+
+const createHTMLWarriors = () => {
+  let htmlTxt = "";
+  var i = 0;
+
+  warriors.forEach((warrior) => {
+    htmlTxt += `
+      <div class="warrior-card">
+      <h3>${warrior.categoryName} </h3>
+      <img src=${warrior.image} />
+          <button data-id="${i}" class="warrior-button">${warrior.categoryName}: ${warrior.priceGold}</button>
+          </div>
+      `;
+    i++;
+  });
+
+  warriorOutputDiv.innerHTML = htmlTxt;
+};
+
+const createHTMLOthers = () => {
+  let htmlTxt = "";
+  var i = 0;
+
+  other.forEach((other) => {
+    htmlTxt += `
+      <div class="warrior-card">
+      <h3>${other.categoryName} </h3>
+      <img src=${other.image} />
+          <button data-id="${i}" class="other-button">${other.categoryName}: ${other.priceGold} ${other.priceWood} ${other.priceIron}</button>
+          </div>
+      `;
+    i++;
+  });
+
+  warriorOutputDiv.innerHTML = htmlTxt;
+};
+
+// Functionality for buying stuff :P
 
 const buyWarrior = (x) => {
   const categoryName = warriors[x].categoryName;
@@ -121,7 +112,16 @@ const buyWarrior = (x) => {
     priceGold: priceGold,
     image: image,
   };
-  WarriorModule.saveWarrior(newWarrior);
+
+  if (newWarrior.priceGold <= goldCount) {
+    let r = goldCount - newWarrior.priceGold;
+    goldCount = r;
+    localStorage.setItem("goldCount", r);
+    WarriorModule.saveWarrior(newWarrior);
+    updateCounts();
+  } else {
+    alert("You do not have enough Gold!");
+  }
 };
 
 const buyOther = (x) => {
@@ -131,7 +131,6 @@ const buyOther = (x) => {
   const priceIron = other[x].priceIron;
   const image = other[x].image;
 
-  // TODO: check if input fields are filled out
   const newOther = {
     categoryName: categoryName,
     priceGold: priceGold,
@@ -142,46 +141,30 @@ const buyOther = (x) => {
   OtherModule.saveOther(newOther);
 };
 
-// Buying warrior event listeners
+// Setting buying event listeners
 
-giant.addEventListener("click", () => {
-  buyWarrior(1);
-});
+const setWarriorButtonEvents = () => {
+  const buttons = document.querySelectorAll(".warrior-button");
 
-paladin.addEventListener("click", () => {
-  buyWarrior(2);
-});
+  buttons.forEach((button, i) => {
+    button.addEventListener("click", () => buyWarrior(i - 1));
+    i++;
+  });
+};
 
-rogue.addEventListener("click", () => {
-  buyWarrior(3);
-});
+const setOtherButtonEvents = () => {
+  const buttons = document.querySelectorAll(".other-button");
 
-knight.addEventListener("click", () => {
-  buyWarrior(4);
-});
-
-archer.addEventListener("click", () => {
-  buyWarrior(5);
-});
-
-viper.addEventListener("click", () => {
-  buyWarrior(0);
-});
-
-// Buying Other event listeners
-
-cannon.addEventListener("click", () => {
-  buyOther(0);
-});
-
-catapult.addEventListener("click", () => {
-  buyOther(1);
-});
-
-elephant.addEventListener("click", () => {
-  buyOther(2);
-});
+  buttons.forEach((button, i) => {
+    button.addEventListener("click", () => buyOther(i - 1));
+    i++;
+  });
+};
 
 (() => {
   showAllResources();
+  createHTMLWarriors();
+  createHTMLOthers();
+  setWarriorButtonEvents();
+  setOtherButtonEvents();
 })();

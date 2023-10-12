@@ -17,18 +17,19 @@
     <script type="module" src="/scripts/your-army.js"></script>
   </head>
   <body>
-    <div>
-      <a href="gathering-army.html">
-        <p>gathering-army</p>
-      </a>
-      <a href="your-army.html"> <p>your-army</p> </a>
-      <a href="getting-resources.html"><p>getting-resources</p> </a>
+    <div class="container">
+      <header class="nested columns">
+        <div id="resource-div">
+          <p id="wood-count">Wood:</p>
+          <p id="gold-count">Gold:</p>
+          <p id="iron-count">Iron:</p>
+        </div>
+
+        <a href="gathering-army.html"> gathering-army </a>
+        <a href="your-army.html"> your-army</a>
+        <a href="getting-resources.html">getting-resources</a>
+      </header>
+      <section id="warrior-output"></section>
     </div>
-    <div id="resource-div">
-      <p id="wood-count">Wood:</p>
-      <p id="gold-count">Gold:</p>
-      <p id="iron-count">Iron:</p>
-    </div>
-    <section id="warrior-output" class="row"></section>
   </body>
 </html>

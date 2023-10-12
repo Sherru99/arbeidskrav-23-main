@@ -14,9 +14,9 @@ const showAllResources = () => {
 
   htmlTxt = `
 
-    <p id="wood-count">>Wood: ${woodCount}</p>
-    <p id="gold-count">>Gold: ${goldCount}</p>
-    <p id="iron-count">>Iron: ${ironCount}</p>
+    <p id="wood-count">Wood: ${woodCount}</p>
+    <p id="gold-count">Gold: ${goldCount}</p>
+    <p id="iron-count">Iron: ${ironCount}</p>
 
         `;
 
@@ -52,9 +52,7 @@ const getAllWarriors = () => {
       htmlTxt += `
               
                     <h3>${warrior.categoryName} </h3>
-                    <p>Pris: ${warrior.priceGold}</p>
                     <img src=${warrior.image} />
-               
             `;
     });
   } else {

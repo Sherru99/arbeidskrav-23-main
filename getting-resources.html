@@ -17,27 +17,28 @@
     <script type="module" src="./scripts/getting-resources.js"></script>
   </head>
   <body>
-    <div>
-      <a href="gathering-army.html">
-        <p>gathering-army</p>
-      </a>
-      <a href="your-army.html"> <p>your-army</p> </a>
-      <a href="getting-resources.html"><p>getting-resources</p> </a>
-    </div>
-    <div id="resource-div">
-      <p id="wood-count">Wood:</p>
-      <p id="gold-count">Gold:</p>
-      <p id="iron-count">Iron:</p>
-    </div>
+    <div class="container">
+      <header class="nested columns">
+        <div id="resource-div">
+          <p id="wood-count">Wood:</p>
+          <p id="gold-count">Gold:</p>
+          <p id="iron-count">Iron:</p>
+        </div>
 
-    <div class="resource-container">
-      <img src="/images/woods-of-ghalduz.png" alt="Wood" id="wood-image" />
-    </div>
+        <a href="gathering-army.html"> gathering-army </a>
+        <a href="your-army.html"> your-army</a>
+        <a href="getting-resources.html">getting-resources</a>
+      </header>
 
-    <div class="resource-container">
-      <img src="/images/mines-of-thiartha.jpg" alt="Mine" id="mine-image" />
-    </div>
+      <div class="resource-container">
+        <img src="/images/woods-of-ghalduz.png" alt="Wood" id="wood-image" />
+      </div>
 
-    <script defer src="/scripts/getting-resources.js"></script>
+      <div class="resource-container">
+        <img src="/images/mines-of-thiartha.jpg" alt="Mine" id="mine-image" />
+      </div>
+
+      <script defer src="/scripts/getting-resources.js"></script>
+    </div>
   </body>
 </html>

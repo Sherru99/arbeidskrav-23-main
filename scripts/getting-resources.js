@@ -11,6 +11,9 @@ const showAllResources = () => {
 
   htmlTxt = `
 
+
+  
+
     <p id="wood-count">Wood: ${woodCount}</p>
     <p id="gold-count">Gold: ${goldCount}</p>
     <p id="iron-count">Iron: ${ironCount}</p>
@@ -34,13 +37,14 @@ function updateCounts() {
 const mineClick = () => {
   const isGold = Math.random() < 0.25;
   if (isGold) {
-    goldCount++;
+    // Edit this on release! ADMIN Mode
+    let r = goldCount + 20;
+    goldCount = r;
+    //
     updateCounts();
-    showAllResources();
   } else {
     ironCount++;
     updateCounts();
-    showAllResources();
   }
 };
 

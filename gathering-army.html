@@ -17,35 +17,27 @@
     <script type="module" src="/scripts/gathering-army.js"></script>
   </head>
   <body>
-    <div>
-      <a href="gathering-army.html">
-        <p>gathering-army</p>
-      </a>
-      <a href="your-army.html"> <p>your-army</p> </a>
-      <a href="getting-resources.html"><p>getting-resources</p> </a>
-    </div>
-    <div id="resource-div">
-      <p id="wood-count">Wood:</p>
-      <p id="gold-count">Gold:</p>
-      <p id="iron-count">Iron:</p>
-    </div>
+    <div class="container">
+      <header class="nested columns">
+        <div id="resource-div">
+          <p id="wood-count">Wood:</p>
+          <p id="gold-count">Gold:</p>
+          <p id="iron-count">Iron:</p>
+        </div>
 
-    <section id="buyable-warriors" class="row">
-      <div class="col">
-        <img id="viper" src="/images/warrior-1.jpg" alt="" />
-        <img id="giant" src="/images/warrior-2.jpg" alt="" />
-        <img id="paladin" src="/images/warrior-3.jpg" alt="" />
-        <img id="rogue" src="/images/warrior-4.jpg" alt="" />
-        <img id="knight" src="/images/warrior-5.jpg" alt="" />
-        <img id="archer" src="/images/warrior-6.jpg" alt="" />
-      </div>
-    </section>
-    <section id="buyable-warmachines-and-animals" class="row">
-      <div class="col">
-        <img id="cannon" src="/images/cannon.png" alt="" />
-        <img id="catapult" src="/images/catapult.png" alt="" />
-        <img id="elephant" src="/images/elephant.png" alt="" />
-      </div>
-    </section>
+        <a href="gathering-army.html"> gathering-army </a>
+        <a href="your-army.html"> your-army</a>
+        <a href="getting-resources.html">getting-resources</a>
+      </header>
+
+      <section id="buyable-warriors"></section>
+      <section id="buyable-warmachines-and-animals" class="row">
+        <div class="col">
+          <img id="cannon" src="/images/cannon.png" alt="" />
+          <img id="catapult" src="/images/catapult.png" alt="" />
+          <img id="elephant" src="/images/elephant.png" alt="" />
+        </div>
+      </section>
+    </div>
   </body>
 </html>
